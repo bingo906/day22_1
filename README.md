@@ -289,6 +289,9 @@ catch(FileUploadException e){
 
 
 **3.邮件收发过程**
+
 ![邮件系统](https://github.com/bingo906/day22_1/blob/master/imagefolder/JavaMail1.png?raw=true)
+
 **跨服务器：**
+
 ![邮件收发2](https://github.com/bingo906/day22_1/blob/master/imagefolder/JavaMail2.png?raw=true)
