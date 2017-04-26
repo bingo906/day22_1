@@ -237,3 +237,37 @@ catch(FileUploadException e){
 	设置缓存大小与临时目录：
 	`new DiskFileItemFactory(20*1024,new File("F:/"))`
 	注释上传限制
+	### 下载
+1.下载就是想客户端响应字节数据！
+	原来我们响应的都是html的字符数据！
+	把一个文件变成字节数组，使用`response.getOutputStream()`来响应給浏览器
+2.下载的要求
+* 两个头一个流
+> `Content-Type`：传递给客户端的文件是什么MINE类型，例如：image/pjpeg
+> `Content-Disposition`:	他的默认值为inline，表示在浏览器窗口中打开！
+`attachment;filename-xxx`
+> 流：要下载的文件数据
+
+####下载的细节
+1.显示在下载框的中文名称会出现乱码
+>  *  FireFox：Base64编码 
+>  * 其他部分浏览器采用URL编码
+> 通用方案：
+> `filename = new String(filename.getBytes("GBK"),"IOS-8859-1");`
+```
+// 用来对下载的文件名称进行编码的！
+	public static String filenameEncoding(String filename, HttpServletRequest request) throws IOException {
+		String agent = request.getHeader("User-Agent"); //获取浏览器
+		if (agent.contains("Firefox")) {
+			BASE64Encoder base64Encoder = new BASE64Encoder();
+			filename = "=?utf-8?B?"
+					+ base64Encoder.encode(filename.getBytes("utf-8"))
+					+ "?=";
+		} else if(agent.contains("MSIE")) {
+			filename = URLEncoder.encode(filename, "utf-8");
+		} else {
+			filename = URLEncoder.encode(filename, "utf-8");
+		}
+		return filename;
+	}
+```
