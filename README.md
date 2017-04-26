@@ -273,3 +273,22 @@ catch(FileUploadException e){
 		return filename;
 	}
 ```
+### JavaMail
+是Java提供的一组API，用来发送和接收邮件
+
+**1.收发邮件**
+```sequence
+客户端1->>邮件服务器: 发邮件
+邮件服务器->>客户端2: 收邮件
+```
+**2.邮件协议概述**
+	>与HTTP协议相同，收发邮件也是需要有传输协议的。
+	* SMTP：(simple Mail Transfer Protocol,简单邮件传输协议)发邮件协议
+	* POP3：(Post Office Protocol Version 3,邮局协议第3版)
+	* IMAP：(Internet Message Access Protocol,因特网消息访问协议)收发邮件协议，暂不涉及
+
+
+**3.邮件收发过程**
+![邮件系统](https://github.com/bingo906/day22_1/blob/master/imagefolder/JavaMail1.png?raw=true)
+**跨服务器：**
+![邮件收发2](https://github.com/bingo906/day22_1/blob/master/imagefolder/JavaMail2.png?raw=true)
