@@ -28,13 +28,13 @@ public class Upload3Servlet extends HttpServlet {
 			 * 上传三步
 			 */
 			//工厂
-			DiskFileItemFactory factory = new DiskFileItemFactory();
+			DiskFileItemFactory factory = new DiskFileItemFactory(20*1024,new File("F:/f/temp"));
 			//解析器
 			ServletFileUpload sfu = new ServletFileUpload(factory);
 			//限制单个文字大小为100K(需要在解析开始之前使用)
-			sfu.setFileSizeMax(100*1024);
+			//sfu.setFileSizeMax(100*1024);
 			//限制整个表单大小为1m
-			sfu.setSizeMax(1024*1024);
+			//sfu.setSizeMax(1024*1024);
 			//解析，得到List
 			try{
 				List<FileItem> list = sfu.parseRequest(request);
