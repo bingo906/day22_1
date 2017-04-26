@@ -23,9 +23,11 @@ public class Download1Servlet extends HttpServlet {
 			 * 3.流：下载文件的数据
 			 */
 		String filename = "F:/流程.jpg";
+		//解决下载名中文编码问题
+		String framenname = new String("流程.jpg".getBytes("GBK"),"ISO-8859-1");
 		FileInputStream input = new FileInputStream(filename);
 		String contentType = this.getServletContext().getMimeType(filename);
-		String contentDisposition = "attachment;filename=aa.jpg";
+		String contentDisposition = "attachment;filename="+framenname;
 		response.setHeader("Content-Type", contentType);
 		response.setHeader("Content-Disposition", contentDisposition);
 		
