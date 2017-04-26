@@ -212,6 +212,7 @@ public void doPost(HttpServletRequest request, HttpServletResponse response)
 **  4.上传文件的大小限制**
 	* 单个文件大小限制
 	* 整个请求大小限制
+	
 ```
 //限制单个文字大小为100K(需要在解析开始之前使用			sfu.setFileSizeMax(100*1024);
 //限制整个表单大小为1m	sfu.setSizeMax(1024*1024);
@@ -233,11 +234,12 @@ catch(FileUploadException e){
 5.缓存大小与临时目录
 	* 超出多大，才向硬盘保存！默认为10KB
 	* 临时目录：向硬盘的什么目录保存
-	`public DiskFileItemFactory(int sizeTheshold,File repository)`
+	
+`public DiskFileItemFactory(int sizeTheshold,File repository)`
 	设置缓存大小与临时目录：
 	`new DiskFileItemFactory(20*1024,new File("F:/"))`
 	注释上传限制
-	### 下载
+### 下载
 1.下载就是想客户端响应字节数据！
 	原来我们响应的都是html的字符数据！
 	把一个文件变成字节数组，使用`response.getOutputStream()`来响应給浏览器
