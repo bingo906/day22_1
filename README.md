@@ -209,9 +209,9 @@ public void doPost(HttpServletRequest request, HttpServletResponse response)
 	}
 ```
 
-**  4.上传文件的大小限制**
-	* 单个文件大小限制
-	* 整个请求大小限制
+**4.上传文件的大小限制**
+* 单个文件大小限制
+* 整个请求大小限制	
 	
 ```
 //限制单个文字大小为100K(需要在解析开始之前使用			sfu.setFileSizeMax(100*1024);
