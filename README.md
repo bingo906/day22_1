@@ -282,10 +282,10 @@ catch(FileUploadException e){
 邮件服务器->>客户端2: 收邮件
 ```
 **2.邮件协议概述**
-	>与HTTP协议相同，收发邮件也是需要有传输协议的。
-	* SMTP：(simple Mail Transfer Protocol,简单邮件传输协议)发邮件协议
-	* POP3：(Post Office Protocol Version 3,邮局协议第3版)
-	* IMAP：(Internet Message Access Protocol,因特网消息访问协议)收发邮件协议，暂不涉及
+>与HTTP协议相同，收发邮件也是需要有传输协议的。
+* SMTP：(simple Mail Transfer Protocol,简单邮件传输协议)发邮件协议
+* POP3：(Post Office Protocol Version 3,邮局协议第3版)
+* IMAP：(Internet Message Access Protocol,因特网消息访问协议)收发邮件协议，暂不涉及
 
 
 **3.邮件收发过程**
