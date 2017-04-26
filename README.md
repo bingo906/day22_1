@@ -295,3 +295,89 @@ catch(FileUploadException e){
 **跨服务器：**
 
 ![邮件收发2](https://github.com/bingo906/day22_1/blob/master/imagefolder/JavaMail2.png?raw=true)
+
+**4.邮件服务器名称**
+smtp服务器端口号为25，服务器名称为smtp.xxx.xxx.
+pop3服务器的端口号为110，服务器名称为pop3.xxx.xxx.
+	>例如：
+	* 163：smtp.163.com和pop3.163.com
+	* qq:smtp.qq.com 和 pop3.qq.com
+
+```
+telnet smtp.126.com 25
+ehlo hello
+auth login 
+YmluZ285MDZAMTI2LmNvbQ==
+password_base64
+mail from:<bingo906@126.com>
+rcpt to:<bingo906@126.com>
+
+data
+from:<bingo906@126.com>
+to:<906014227@qq.com>
+subject:hi,Bingo
+
+h1,this is a mail from cmder!
+.(用于结束)
+quit
+```
+
+#### JavaMail发邮件
+1.导包
+* mail.jar
+* activation.jar
+
+
+**核心类**
+**1.Session **
+	如果得到了它，表示已经与服务器连接上了。
+	>得到Session
+	`Session session = Session.getInstance(Properties prop,Authenticator auth)`
+```
+//获得Session
+    Properties prop = new Properties();
+	pops.setProperty("mail.host","smtp.126.com");//设置服务器主机名
+	props.setProperty("mail.smtp.auth","true");//设置需要认证
+	//Authenticator是一个接口表示认证器
+	Authenticator auth = new Authenticator(){
+		public PasswordAuthentication getPasswordAuthentication(){
+	new PasswordAuthentication("bingo906@126.com","bingo@qq");
+}
+};
+Session session = Session.getInstance();
+
+```
+**2.MimeMessage**
+	它表示一个邮件对象，你可以调用它的setFrom()，设置收件人，设置发件人，设置主题，设置正文。
+```
+	//创建MimeMessage
+		MimeMessage msg = new MimeMessage(session);
+		msg.setFrom(new InternetAddress("bingo906@126.com"));//设置发件人
+		msg.setRecipients(RecipientType.TO, "906014227@qq.com");//设置收件人
+//		msg.setRecipients(RecipientType.CC, "906014227@qq.com");//抄送
+//		msg.setRecipients(RecipientType.BCC, "906014227@qq.com");//设置暗送  
+		msg.setSubject("这是来自Bingo的测试邮件");
+		msg.setContent("一封来自JavaMail的邮件","text/html;charset=utf-8");
+		
+```
+**3.TransPort**
+	他只有一个功能，发邮件。
+	`Transport.send(msg);`
+
+
+#### MailUtils小工具
+icast-tools.jar
+```
+	//得到Session
+	MailUtils.createSession("smtp.126.com","username","password");
+	//创建邮件对象
+	Mail mail = new Mail("sender","receiver","title","conent");
+	//创建两个附件对象
+	AttachBean ab1 = new AttachBean(new File(path),"filename");
+	AttachBean ab2 = new AttachBean(new File(path2),"filename2");
+	//添加到mail中
+	mail.addAttach(ab1);
+	mail.addAttach(ab2);
+	//发送邮件
+	MailUtils.send(session.mail);
+```
